@@ -5,8 +5,24 @@
  */
 package com.erdincozdemir.qrcodecreator.objects;
 
+import java.io.FileOutputStream; 
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Paragraph; 
+import com.itextpdf.text.pdf.BarcodeQRCode;
+import com.itextpdf.text.Rectangle;
+
+import javax.imageio.ImageIO;
+
+import java.io.File;
+import java.io.IOException;
+import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.media.jai.operator.AWTImageDescriptor; //Java advanced Imaging library
 
 /**
  *
@@ -91,6 +107,30 @@ public class VCard {
         this.emails = new ArrayList<>();
         this.phoneNumbers = new ArrayList<>();
     }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
+    
+    public void createQRCode(String path) throws Exception {
+        BarcodeQRCode my_code = new BarcodeQRCode(this.toString(), 1, 1, null);
+		
+		
+        Document vCard_QR_Code = new Document(new Rectangle(360, 852));
+        vCard_QR_Code.open();              
+        vCard_QR_Code.add(my_code.getImage());        
+        vCard_QR_Code.close();
+        /* Create QR Code as a PNG Image file */
+        Image qr_awt_image = my_code.createAwtImage(Color.BLACK,Color.WHITE);        
+        AWTImageDescriptor converter=new AWTImageDescriptor();
+        try {           
+                ImageIO.write(converter.create(qr_awt_image,null), "png",new File(path));        
+        }
+        catch (IOException e) {
+                e.printStackTrace();
+        }
+    }
 }

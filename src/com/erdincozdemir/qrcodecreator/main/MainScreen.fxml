@@ -50,11 +50,11 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="14.0" layoutY="51.0" mnemonicParsing="false" text="Email Ekle" fx:id="btnAddEamil" />
+                <Button layoutX="14.0" layoutY="51.0" mnemonicParsing="false" text="Email Ekle" fx:id="btnAddEamil" onAction="#addEmail"  />
                 <TextField layoutX="96.0" layoutY="14.0" prefWidth="200.0"  fx:id="txtEmail" />
-                <ComboBox layoutX="14.0" layoutY="15.0" prefHeight="21.0" prefWidth="73.0" promptText="Tip">
+                <ComboBox layoutX="14.0" layoutY="15.0" prefHeight="21.0" prefWidth="73.0" promptText="Tip" fx:id="cmbEmailType">
                   <items>
-                    <FXCollections fx:factory="observableArrayList" fx:id="cmbEmailType">
+                    <FXCollections fx:factory="observableArrayList">
                       <String fx:value="İş" />
                       <String fx:value="Kişisel" />
                     </FXCollections>
@@ -68,7 +68,7 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="14.0" layoutY="53.0" mnemonicParsing="false" text="Telefon Ekle"  fx:id="btnAddPhone" />
+                <Button layoutX="14.0" layoutY="53.0" mnemonicParsing="false" text="Telefon Ekle"  fx:id="btnAddPhone" onAction="#addPhoneNumber"  />
                 <TextField layoutX="105.0" layoutY="14.0" prefWidth="200.0"  fx:id="txtPhone" />
                 <ComboBox layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="83.9998779296875" promptText="Tip" fx:id="cmbPhoneType">
                   <items>
