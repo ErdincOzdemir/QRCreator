@@ -127,10 +127,42 @@ public class VCard {
         Image qr_awt_image = my_code.createAwtImage(Color.BLACK,Color.WHITE);        
         AWTImageDescriptor converter=new AWTImageDescriptor();
         try {           
-                ImageIO.write(converter.create(qr_awt_image,null), "png",new File(path));        
+            ImageIO.write(converter.create(qr_awt_image,null), "png",new File(path));        
         }
         catch (IOException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
+    }
+    
+    public String getSummary() {
+        return this.getAddresses().size() + " adet adres, " + this.getEmails().size() + " adet email, " + this.getPhoneNumbers().size() + " adet telefon numarası bulunan bir kişi kartı oluşturulacak.";
+    }
+    
+    public String getDetail() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("İsim: " + this.getFirstName() + "\n");
+        sb.append("Soyisim: " + this.getLastName()+ "\n");
+        if(!this.getCompanyName().isEmpty()) sb.append("Şirket: " + this.getCompanyName()+ "\n");
+        if(!this.getTitle().isEmpty()) sb.append("Ünvan: " + this.getTitle()+ "\n");
+        if(!this.getWebUrl().isEmpty()) sb.append("Url: " + this.getWebUrl()+ "\n");
+        if(this.getAddresses().size() > 0) {
+            sb.append("\nAdresler: \n");
+            for (Address address : this.addresses) {
+                sb.append("\t" + address + "\n");
+            }
+        }
+        if(this.getEmails().size() > 0) {
+            sb.append("\nEmailler: \n");
+            for (Email email : this.emails) {
+                sb.append("\t" + email + "\n");
+            }
+        }
+        if(this.getPhoneNumbers().size() > 0) {
+            sb.append("\nTelefon Numaraları: \n");
+            for (PhoneNumber phoneNumber : this.phoneNumbers) {
+                sb.append("\t" + phoneNumber + "\n");
+            }
+        }
+        return sb.toString();
     }
 }

@@ -51,5 +51,8 @@ public class Address {
         this.country = country;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.getAddressType() + " - " + this.getAddressLine() + " " + this.getCity() + " " + this.getCountry();
+    }
 }

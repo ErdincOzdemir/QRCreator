@@ -33,5 +33,8 @@ public class PhoneNumber {
         this.phoneNumber = phoneNumber;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.getPhoneNumberType().toString() + " - " + this.getPhoneNumber();
+    }
 }

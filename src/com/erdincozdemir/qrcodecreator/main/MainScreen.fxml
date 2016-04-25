@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="347.0" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.erdincozdemir.qrcodecreator.main.MainScreenController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="347.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.erdincozdemir.qrcodecreator.main.MainScreenController">
   <children>
     <Label layoutX="14.0" layoutY="17.0" text="vCard QR Code Oluşturucu" />
     <TabPane layoutX="14.0" layoutY="51.0" prefHeight="349.0" prefWidth="319.0" tabClosingPolicy="UNAVAILABLE">
@@ -16,11 +16,11 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <TextField layoutX="14.0" layoutY="14.0" prefWidth="200.0" promptText="İsim" fx:id="txtFirstName"  />
-                <TextField layoutX="14.0" layoutY="44.0" prefWidth="200.0" promptText="Soyisim"  fx:id="txtLastName" />
-                <TextField layoutX="14.0" layoutY="75.0" prefWidth="200.0" promptText="Şirket İsmi"  fx:id="txtCompanyName" />
-                <TextField layoutX="14.0" layoutY="105.0" prefWidth="200.0" promptText="Title"  fx:id="txtTitle" />
-                <TextField layoutX="14.0" layoutY="137.0" prefWidth="200.0" promptText="Web Adresi"  fx:id="txtUrl" />
+                <TextField fx:id="txtFirstName" layoutX="14.0" layoutY="14.0" prefWidth="200.0" promptText="İsim" />
+                <TextField fx:id="txtLastName" layoutX="14.0" layoutY="44.0" prefWidth="200.0" promptText="Soyisim" />
+                <TextField fx:id="txtCompanyName" layoutX="14.0" layoutY="75.0" prefWidth="200.0" promptText="Şirket İsmi" />
+                <TextField fx:id="txtTitle" layoutX="14.0" layoutY="105.0" prefWidth="200.0" promptText="Ünvan" />
+                <TextField fx:id="txtUrl" layoutX="14.0" layoutY="137.0" prefWidth="200.0" promptText="Web Adresi" />
               </children>
             </AnchorPane>
           </content>
@@ -29,8 +29,8 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="16.0" layoutY="138.0" mnemonicParsing="false" text="Adres Ekle" fx:id="btnAddAddress" onAction="#addAddress"  />
-                <ComboBox layoutX="14.0" layoutY="14.0" promptText="Tip" fx:id="cmbAddressType">
+                <Button fx:id="btnAddAddress" layoutX="16.0" layoutY="138.0" mnemonicParsing="false" onAction="#addAddress" text="Adres Ekle" />
+                <ComboBox fx:id="cmbAddressType" layoutX="14.0" layoutY="14.0" promptText="Tip">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="İş" />
@@ -39,9 +39,10 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <TextField layoutX="14.0" layoutY="46.0" prefWidth="289.0" promptText="Adres" fx:id="txtAddressLine" />
-                <TextField layoutX="13.0" layoutY="78.0" prefWidth="289.0" promptText="Şehir" fx:id="txtCity" />
-                <TextField layoutX="13.0" layoutY="107.0" prefWidth="289.0" promptText="Ülke" fx:id="txtCountry" />
+                <TextField fx:id="txtAddressLine" layoutX="14.0" layoutY="46.0" prefWidth="289.0" promptText="Adres" />
+                <TextField fx:id="txtCity" layoutX="13.0" layoutY="78.0" prefWidth="289.0" promptText="Şehir" />
+                <TextField fx:id="txtCountry" layoutX="13.0" layoutY="107.0" prefWidth="289.0" promptText="Ülke" />
+                <ListView fx:id="lstAddresses" layoutX="16.0" layoutY="172.0" prefHeight="132.0" prefWidth="292.0" />
               </children>
             </AnchorPane>
           </content>
@@ -50,9 +51,9 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="14.0" layoutY="51.0" mnemonicParsing="false" text="Email Ekle" fx:id="btnAddEamil" onAction="#addEmail"  />
-                <TextField layoutX="96.0" layoutY="14.0" prefWidth="200.0"  fx:id="txtEmail" />
-                <ComboBox layoutX="14.0" layoutY="15.0" prefHeight="21.0" prefWidth="73.0" promptText="Tip" fx:id="cmbEmailType">
+                <Button fx:id="btnAddEmail" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" onAction="#addEmail" text="Email Ekle" />
+                <TextField fx:id="txtEmail" layoutX="96.0" layoutY="14.0" prefWidth="200.0" />
+                <ComboBox fx:id="cmbEmailType" layoutX="14.0" layoutY="15.0" prefHeight="21.0" prefWidth="73.0" promptText="Tip">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="İş" />
@@ -60,6 +61,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
+                <ListView fx:id="lstEmailAddresses" layoutX="14.0" layoutY="104.0" prefHeight="200.0" prefWidth="305.0" />
               </children>
             </AnchorPane>
           </content>
@@ -68,9 +70,9 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button layoutX="14.0" layoutY="53.0" mnemonicParsing="false" text="Telefon Ekle"  fx:id="btnAddPhone" onAction="#addPhoneNumber"  />
-                <TextField layoutX="105.0" layoutY="14.0" prefWidth="200.0"  fx:id="txtPhone" />
-                <ComboBox layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="83.9998779296875" promptText="Tip" fx:id="cmbPhoneType">
+                <Button fx:id="btnAddPhone" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" onAction="#addPhoneNumber" text="Telefon Ekle" />
+                <TextField fx:id="txtPhone" layoutX="105.0" layoutY="14.0" prefWidth="200.0" />
+                <ComboBox fx:id="cmbPhoneType" layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="83.9998779296875" promptText="Tip">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="İş" />
@@ -79,12 +81,13 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
+                <ListView fx:id="lstPhoneNumbers" layoutX="0.0" layoutY="81.0" prefHeight="223.0" prefWidth="319.0" />
               </children>
             </AnchorPane>
           </content>
         </Tab>
       </tabs>
     </TabPane>
-    <Button layoutX="277.0" layoutY="17.0" mnemonicParsing="false" text="Oluştur"  fx:id="btnCreate" onAction="#createQRCode"  />
+    <Button fx:id="btnCreate" layoutX="277.0" layoutY="17.0" mnemonicParsing="false" onAction="#createQRCode" text="Oluştur" />
   </children>
 </AnchorPane>

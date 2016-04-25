@@ -33,5 +33,8 @@ public class Email {
         this.email = email;
     }
     
-    
+    @Override
+    public String toString() {
+        return this.getEmailType() + " - " + this.getEmail();
+    }
 }
