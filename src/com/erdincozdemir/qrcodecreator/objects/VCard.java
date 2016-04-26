@@ -5,11 +5,7 @@
  */
 package com.erdincozdemir.qrcodecreator.objects;
 
-import java.io.FileOutputStream; 
-
 import com.itextpdf.text.Document;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.Paragraph; 
 import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.Rectangle;
 
@@ -28,11 +24,15 @@ import javax.media.jai.operator.AWTImageDescriptor; //Java advanced Imaging libr
  *
  * @author erdinc.ozdemir
  */
-public class VCard {
+public class VCard implements Base {
+    
+    private final String vCardHeader = "BEGIN:VCARD\nVERSION:3.0\n";
+    private final String vCardFooter = "END:VCARD";
+    
     private String firstName;
     private String lastName;
     private String companyName;
-    private String Title;
+    private String title;
     private String webUrl;
     private List<Address> addresses;
     private List<Email> emails;
@@ -63,11 +63,11 @@ public class VCard {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String Title) {
-        this.Title = Title;
+        this.title = Title;
     }
 
     public String getWebUrl() {
@@ -113,19 +113,17 @@ public class VCard {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
-    
     public void createQRCode(String path) throws Exception {
-        BarcodeQRCode my_code = new BarcodeQRCode(this.toString(), 1, 1, null);
-		
-		
+        System.out.println(this.toVCardString());
+        BarcodeQRCode my_code = new BarcodeQRCode(this.toVCardString(), 1, 1, null);
+
         Document vCard_QR_Code = new Document(new Rectangle(360, 852));
         vCard_QR_Code.open();              
         vCard_QR_Code.add(my_code.getImage());        
         vCard_QR_Code.close();
         /* Create QR Code as a PNG Image file */
         Image qr_awt_image = my_code.createAwtImage(Color.BLACK,Color.WHITE);        
-        AWTImageDescriptor converter=new AWTImageDescriptor();
+        AWTImageDescriptor converter = new AWTImageDescriptor();
         try {           
             ImageIO.write(converter.create(qr_awt_image,null), "png",new File(path));        
         }
@@ -140,29 +138,53 @@ public class VCard {
     
     public String getDetail() {
         StringBuilder sb = new StringBuilder();
-        sb.append("İsim: " + this.getFirstName() + "\n");
-        sb.append("Soyisim: " + this.getLastName()+ "\n");
-        if(!this.getCompanyName().isEmpty()) sb.append("Şirket: " + this.getCompanyName()+ "\n");
-        if(!this.getTitle().isEmpty()) sb.append("Ünvan: " + this.getTitle()+ "\n");
-        if(!this.getWebUrl().isEmpty()) sb.append("Url: " + this.getWebUrl()+ "\n");
+        sb.append("İsim: ").append(this.getFirstName()).append("\n");
+        sb.append("Soyisim: ").append(this.getLastName()).append("\n");
+        if(!this.getCompanyName().isEmpty()) sb.append("Şirket: ").append(this.getCompanyName()).append("\n");
+        if(!this.getTitle().isEmpty()) sb.append("Ünvan: ").append(this.getTitle()).append("\n");
+        if(!this.getWebUrl().isEmpty()) sb.append("Url: ").append(this.getWebUrl()).append("\n");
         if(this.getAddresses().size() > 0) {
             sb.append("\nAdresler: \n");
             for (Address address : this.addresses) {
-                sb.append("\t" + address + "\n");
+                sb.append("\t").append(address).append("\n");
             }
         }
         if(this.getEmails().size() > 0) {
             sb.append("\nEmailler: \n");
             for (Email email : this.emails) {
-                sb.append("\t" + email + "\n");
+                sb.append("\t").append(email).append("\n");
             }
         }
         if(this.getPhoneNumbers().size() > 0) {
             sb.append("\nTelefon Numaraları: \n");
             for (PhoneNumber phoneNumber : this.phoneNumbers) {
-                sb.append("\t" + phoneNumber + "\n");
+                sb.append("\t").append(phoneNumber).append("\n");
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public String toVCardString() {
+        StringBuilder vCardContent = new StringBuilder();
+        vCardContent.append(String.format("N:%s;%s;;%n", this.lastName, this.firstName));
+        vCardContent.append(String.format("FN:%s %s%n", this.lastName, this.firstName));
+        if(!this.companyName.isEmpty()) vCardContent.append(String.format("ORG:%s%n", this.companyName));
+        if(!this.webUrl.isEmpty()) vCardContent.append(String.format("URL:%s%n", this.webUrl));
+        if(!this.title.isEmpty()) vCardContent.append(String.format("TITLE:%s%n", this.title));
+        
+        for (PhoneNumber phoneNumber : this.phoneNumbers) {
+            vCardContent.append(phoneNumber.toVCardString());
+        }
+        
+        for (Address address : this.addresses) {
+            vCardContent.append(address.toVCardString());
+        }
+        
+        for (Email email : this.emails) {
+            vCardContent.append(email.toVCardString());
+        }
+        
+        return String.format("%s%s%s", this.vCardHeader, vCardContent, this.vCardFooter);
     }
 }
