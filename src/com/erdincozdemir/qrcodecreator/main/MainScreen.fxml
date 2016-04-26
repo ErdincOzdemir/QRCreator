@@ -35,7 +35,6 @@
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="İş" />
                       <String fx:value="Ev" />
-                      <String fx:value="Diğer" />
                     </FXCollections>
                   </items>
                 </ComboBox>
@@ -52,15 +51,7 @@
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
                 <Button fx:id="btnAddEmail" layoutX="14.0" layoutY="51.0" mnemonicParsing="false" onAction="#addEmail" text="Email Ekle" />
-                <TextField fx:id="txtEmail" layoutX="96.0" layoutY="14.0" prefWidth="200.0" />
-                <ComboBox fx:id="cmbEmailType" layoutX="14.0" layoutY="15.0" prefHeight="21.0" prefWidth="73.0" promptText="Tip">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <String fx:value="İş" />
-                      <String fx:value="Kişisel" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
+                <TextField fx:id="txtEmail" layoutX="14.0" layoutY="14.0" prefWidth="282.0" promptText="Email" />
                 <ListView fx:id="lstEmailAddresses" layoutX="14.0" layoutY="104.0" prefHeight="200.0" prefWidth="305.0" />
               </children>
             </AnchorPane>
@@ -71,13 +62,12 @@
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
                 <Button fx:id="btnAddPhone" layoutX="14.0" layoutY="53.0" mnemonicParsing="false" onAction="#addPhoneNumber" text="Telefon Ekle" />
-                <TextField fx:id="txtPhone" layoutX="105.0" layoutY="14.0" prefWidth="200.0" />
+                <TextField fx:id="txtPhone" layoutX="105.0" layoutY="14.0" prefWidth="200.0" promptText="Telefon" />
                 <ComboBox fx:id="cmbPhoneType" layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="83.9998779296875" promptText="Tip">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
                       <String fx:value="İş" />
                       <String fx:value="Ev" />
-                      <String fx:value="Diğer" />
                     </FXCollections>
                   </items>
                 </ComboBox>

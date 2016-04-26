@@ -9,9 +9,12 @@ package com.erdincozdemir.qrcodecreator.objects;
  *
  * @author erdinc.ozdemir
  */
-public class PhoneNumber {
+public class PhoneNumber implements Base {
+    
+    private final String vCardString = "TEL;TYPE=%s,VOICE:%s%n";
+    
     public enum PhoneNumberType {
-        WORK, HOME, OTHER
+        WORK, HOME
     }
     
     private PhoneNumberType phoneNumberType;
@@ -36,5 +39,10 @@ public class PhoneNumber {
     @Override
     public String toString() {
         return this.getPhoneNumberType().toString() + " - " + this.getPhoneNumber();
+    }    
+
+    @Override
+    public String toVCardString() {
+        return String.format(this.vCardString, this.phoneNumberType, this.phoneNumber);
     }
 }

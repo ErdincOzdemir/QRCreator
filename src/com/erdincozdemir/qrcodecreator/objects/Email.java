@@ -9,21 +9,11 @@ package com.erdincozdemir.qrcodecreator.objects;
  *
  * @author erdinc.ozdemir
  */
-public class Email {
-    public enum EmailType {
-        WORK, PERSONAL
-    }
+public class Email implements Base {
     
-    private EmailType emailType;
+    private final String vCardString = "EMAIL;TYPE=INTERNET:%s%n";
+    
     private String email;
-
-    public EmailType getEmailType() {
-        return emailType;
-    }
-
-    public void setEmailType(EmailType emailType) {
-        this.emailType = emailType;
-    }
 
     public String getEmail() {
         return email;
@@ -35,6 +25,11 @@ public class Email {
     
     @Override
     public String toString() {
-        return this.getEmailType() + " - " + this.getEmail();
+        return this.getEmail();
     }
+
+    @Override
+    public String toVCardString() {
+        return String.format(this.vCardString, this.email);
+    }     
 }

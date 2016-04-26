@@ -61,8 +61,6 @@ public class MainScreenController implements Initializable {
     private ListView lstAddresses;
         
     @FXML
-    private ComboBox cmbEmailType;
-    @FXML
     private TextField txtEmail;
     @FXML
     private ListView lstEmailAddresses;
@@ -97,6 +95,8 @@ public class MainScreenController implements Initializable {
             vcard.setCompanyName(txtCompanyName.getText());
             vcard.setTitle(txtTitle.getText());
             vcard.setWebUrl(txtUrl.getText());
+            
+            System.err.println(vcard.getAddresses().get(0).toVCardString());
             
             Optional<ButtonType> result = Utils.showOptionalAlert(vcard.getSummary(), "Emin misiniz?", vcard.getDetail());
                 if(result.get() == ButtonType.OK) {
@@ -141,8 +141,6 @@ public class MainScreenController implements Initializable {
             address.setAddressType(Address.AddressType.WORK);
         } else if(cmbAddressType.getValue().equals("Ev")) {
             address.setAddressType(Address.AddressType.HOME);
-        } else if(cmbAddressType.getValue().equals("Diğer")) {
-            address.setAddressType(Address.AddressType.OTHER);
         }
         
         address.setAddressLine(txtAddressLine.getText());
@@ -157,10 +155,7 @@ public class MainScreenController implements Initializable {
     private void addEmail(ActionEvent event) {
         Email email = new Email();
         
-        StringBuilder formErrors = new StringBuilder();
-        if(cmbEmailType.getValue() == null) {
-            formErrors.append("Lütfen tip seçiniz!\n");
-        }        
+        StringBuilder formErrors = new StringBuilder();       
         if(txtEmail.getText().isEmpty()) {
             formErrors.append("Lütfen email girin!\n");
         }        
@@ -172,12 +167,7 @@ public class MainScreenController implements Initializable {
             Utils.showAlertMessage(Alert.AlertType.ERROR, "Devam edebilmek için aşağıdaki hataları düzeltin", "Hata", formErrors.toString());
             return;
         }
-        
-        if(cmbEmailType.getValue().equals("İş")) {
-            email.setEmailType(Email.EmailType.WORK);
-        } else if(cmbEmailType.getValue().equals("Kişisel")) {
-            email.setEmailType(Email.EmailType.PERSONAL);
-        }
+       
         
         email.setEmail(txtEmail.getText());
         this.vcard.getEmails().add(email);
@@ -208,8 +198,6 @@ public class MainScreenController implements Initializable {
             phoneNumber.setPhoneNumberType(PhoneNumber.PhoneNumberType.WORK);
         } else if(cmbPhoneType.getValue().equals("Ev")) {
             phoneNumber.setPhoneNumberType(PhoneNumber.PhoneNumberType.HOME);
-        } else if(cmbPhoneType.getValue().equals("Diğer")) {
-            phoneNumber.setPhoneNumberType(PhoneNumber.PhoneNumberType.OTHER);
         }
         
         phoneNumber.setPhoneNumber(txtPhone.getText());

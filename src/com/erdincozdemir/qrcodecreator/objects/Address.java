@@ -9,9 +9,12 @@ package com.erdincozdemir.qrcodecreator.objects;
  *
  * @author erdinc.ozdemir
  */
-public class Address {
+public class Address implements Base {
+
+    private final String vCardString = "ADR;TYPE=%s:;;%s;%s;%s%nLABEL;TYPE=%s:%s%n";
+    
     public enum AddressType {
-        WORK, HOME, OTHER
+        WORK, HOME
     }
     
     private AddressType addressType;
@@ -54,5 +57,10 @@ public class Address {
     @Override
     public String toString() {
         return this.getAddressType() + " - " + this.getAddressLine() + " " + this.getCity() + " " + this.getCountry();
+    }
+    
+    @Override
+    public String toVCardString() {
+        return String.format(this.vCardString, this.addressType, this.addressLine, this.city, this.country, this.addressType, (this.addressLine + " " + this.city + " " + this.country));
     }
 }
