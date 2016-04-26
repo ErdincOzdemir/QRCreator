@@ -39,6 +39,11 @@ public class MainScreenController implements Initializable {
     private VCard vcard = new VCard();
     
     @FXML
+    private TextField txtWidth;
+    @FXML
+    private TextField txtHeight;
+    
+    @FXML
     private TextField txtFirstName;
     @FXML
     private TextField txtLastName;
@@ -77,7 +82,16 @@ public class MainScreenController implements Initializable {
         try {
             
             
-            StringBuilder formErrors = new StringBuilder();    
+            StringBuilder formErrors = new StringBuilder();
+            
+            if(txtWidth.getText().isEmpty() || !Utils.isNumeric(txtWidth.getText())) {
+                formErrors.append("Lütfen geçerli bir genişlik girin!\n");
+            }
+            
+            if(txtHeight.getText().isEmpty() || !Utils.isNumeric(txtHeight.getText())) {
+                formErrors.append("Lütfen geçerli bir yükseklik girin!\n");
+            }
+            
             if(txtFirstName.getText().isEmpty()) {
                 formErrors.append("Lütfen isim girin!\n");
             }        
@@ -90,13 +104,13 @@ public class MainScreenController implements Initializable {
                 return;
             }
             
+            vcard.setWidth(Integer.valueOf(txtWidth.getText()));            
+            vcard.setHeight(Integer.valueOf(txtHeight.getText()));
             vcard.setFirstName(txtFirstName.getText());
             vcard.setLastName(txtLastName.getText());
             vcard.setCompanyName(txtCompanyName.getText());
             vcard.setTitle(txtTitle.getText());
             vcard.setWebUrl(txtUrl.getText());
-            
-            System.err.println(vcard.getAddresses().get(0).toVCardString());
             
             Optional<ButtonType> result = Utils.showOptionalAlert(vcard.getSummary(), "Emin misiniz?", vcard.getDetail());
                 if(result.get() == ButtonType.OK) {

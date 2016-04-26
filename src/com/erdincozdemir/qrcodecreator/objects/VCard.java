@@ -29,6 +29,8 @@ public class VCard implements Base {
     private final String vCardHeader = "BEGIN:VCARD\nVERSION:3.0\n";
     private final String vCardFooter = "END:VCARD";
     
+    private int width;
+    private int height;
     private String firstName;
     private String lastName;
     private String companyName;
@@ -38,6 +40,22 @@ public class VCard implements Base {
     private List<Email> emails;
     private List<PhoneNumber> phoneNumbers;
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+    
     public String getFirstName() {
         return firstName;
     }
@@ -115,7 +133,7 @@ public class VCard implements Base {
     
     public void createQRCode(String path) throws Exception {
         System.out.println(this.toVCardString());
-        BarcodeQRCode my_code = new BarcodeQRCode(this.toVCardString(), 1, 1, null);
+        BarcodeQRCode my_code = new BarcodeQRCode(this.toVCardString(), this.width, this.height, null);
 
         Document vCard_QR_Code = new Document(new Rectangle(360, 852));
         vCard_QR_Code.open();              
