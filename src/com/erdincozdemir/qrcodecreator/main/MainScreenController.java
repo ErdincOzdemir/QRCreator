@@ -40,8 +40,6 @@ public class MainScreenController implements Initializable {
     
     @FXML
     private TextField txtWidth;
-    @FXML
-    private TextField txtHeight;
     
     @FXML
     private TextField txtFirstName;
@@ -78,6 +76,11 @@ public class MainScreenController implements Initializable {
     private ListView lstPhoneNumbers;
     
     @FXML
+    private void close(ActionEvent event) {
+        System.exit(0);
+    }
+    
+    @FXML
     private void createQRCode(ActionEvent event) {
         try {
             
@@ -86,10 +89,6 @@ public class MainScreenController implements Initializable {
             
             if(txtWidth.getText().isEmpty() || !Utils.isNumeric(txtWidth.getText())) {
                 formErrors.append("Lütfen geçerli bir genişlik girin!\n");
-            }
-            
-            if(txtHeight.getText().isEmpty() || !Utils.isNumeric(txtHeight.getText())) {
-                formErrors.append("Lütfen geçerli bir yükseklik girin!\n");
             }
             
             if(txtFirstName.getText().isEmpty()) {
@@ -105,7 +104,7 @@ public class MainScreenController implements Initializable {
             }
             
             vcard.setWidth(Integer.valueOf(txtWidth.getText()));            
-            vcard.setHeight(Integer.valueOf(txtHeight.getText()));
+            vcard.setHeight(Integer.valueOf(txtWidth.getText()));
             vcard.setFirstName(txtFirstName.getText());
             vcard.setLastName(txtLastName.getText());
             vcard.setCompanyName(txtCompanyName.getText());
