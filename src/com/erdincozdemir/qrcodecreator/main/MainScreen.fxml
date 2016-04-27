@@ -13,7 +13,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="Dosya">
           <items>
-            <MenuItem mnemonicParsing="false" text="Ayarlar" /> 
+            <MenuItem mnemonicParsing="false" text="Ayarlar" onAction="#openSettings"  /> 
             <SeparatorMenuItem  />
             <MenuItem mnemonicParsing="false" text="Kapat" onAction="#close"  />
           </items>
