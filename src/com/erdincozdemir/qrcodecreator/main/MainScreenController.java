@@ -9,7 +9,7 @@ import com.erdincozdemir.qrcodecreator.objects.Address;
 import com.erdincozdemir.qrcodecreator.objects.Email;
 import com.erdincozdemir.qrcodecreator.objects.PhoneNumber;
 import com.erdincozdemir.qrcodecreator.objects.VCard;
-import com.erdincozdemir.qrcreator.utilities.Utils;
+import com.erdincozdemir.qrcodecreator.utilities.Utils;
 import java.io.File;
 import java.net.URL;
 import java.util.Optional;
